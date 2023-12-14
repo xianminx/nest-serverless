@@ -6,8 +6,9 @@ import Blog from "./interface";
 const dynamoDB = process.env.IS_OFFLINE
   ? new AWS.DynamoDB.DocumentClient({
       region: "localhost",
-      endpoint: process.env.DYNAMODB_ENDPOINT,
-    })
+      // endpoint: process.env.DYNAMODB_ENDPOINT,
+      endpoint: 'http://127.0.0.1:8000',
+     })
   : new AWS.DynamoDB.DocumentClient();
 console.log(dynamoDB)
 @Injectable()

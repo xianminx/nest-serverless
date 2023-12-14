@@ -2,7 +2,7 @@ service: nest-serverles
 
 plugins:
   - serverless-plugin-optimize
-  - serverless-dynamodb-local
+  - serverless-dynamodb
   - serverless-offline
 functions:
  app: # The name of the lambda function
@@ -49,13 +49,19 @@ custom:
       platform: node
       concurrency: 10
     
-    dynamodb: 
-      start: 
-        port: 5000
+    serverless-dynamodb:
+      # If you only want to use DynamoDB Local in some stages, declare them here
+      stages:
+        - dev
+      start:
+        docker: true
+        host: 127.0.0.1
+        port: 8000
         inMemory: true
         migrate: true
+        seed: true
+        convertEmptyValues: true
       
-      stages: dev
   
 resources: 
     Resources: 
